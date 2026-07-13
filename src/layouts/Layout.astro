@@ -9,14 +9,12 @@ interface Props {
 
 const { content: t, ogImage = "/og-image.jpg" } = Astro.props;
 
-const site = Astro.site ?? new URL("https://mgs-avtoservice.od.ua");
+const site = Astro.site ?? new URL("https://mgs.pp.ua");
 const currentPath = Astro.url.pathname;
-const otherLocale = t.locale === "ru" ? "uk" : "ru";
-const alternatePath = currentPath.replace(`/${t.locale}/`, `/${otherLocale}/`) || `/${otherLocale}/`;
 
 const canonicalUrl = new URL(currentPath, site).toString();
-const ruUrl = new URL(t.locale === "ru" ? currentPath : alternatePath, site).toString();
-const ukUrl = new URL(t.locale === "uk" ? currentPath : alternatePath, site).toString();
+const ruUrl = new URL("/ru/", site).toString();
+const ukUrl = new URL("/", site).toString();
 
 const jsonLd = {
   "@context": "https://schema.org",

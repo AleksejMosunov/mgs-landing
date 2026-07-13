@@ -11,15 +11,10 @@ export default defineConfig({
     defaultLocale: 'uk',
     locales: ['ru', 'uk'],
     routing: {
-      prefixDefaultLocale: true,
-      redirectToDefaultLocale: true,
+      prefixDefaultLocale: false,
     },
   },
-  integrations: [
-    sitemap({
-      filter: (page) => page !== 'https://mgs.pp.ua/',
-    }),
-  ],
+  integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
   },

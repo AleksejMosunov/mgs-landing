@@ -9,9 +9,8 @@ interface Props {
 
 const { content: t } = Astro.props;
 
-const currentPath = Astro.url.pathname;
-const otherLocale = t.locale === "ru" ? "uk" : "ru";
-const alternatePath = currentPath.replace(`/${t.locale}/`, `/${otherLocale}/`) || `/${otherLocale}/`;
+const homePath = t.locale === "ru" ? "/ru/" : "/";
+const alternatePath = t.locale === "ru" ? "/" : "/ru/";
 
 const navItems = [
   { href: "#services", label: t.nav.services },
@@ -26,7 +25,7 @@ const navItems = [
 <header class="sticky top-0 z-50 border-b border-border/80 bg-ink/90 backdrop-blur-md">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 sm:h-20 items-center justify-between gap-4">
-      <a href={`/${t.locale}/`} class="focus-ring rounded shrink-0" aria-label="MGS">
+      <a href={homePath} class="focus-ring rounded shrink-0" aria-label="MGS">
         <Logo content={t} />
       </a>
 
