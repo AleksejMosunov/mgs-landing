@@ -140,7 +140,7 @@ export const contactConst = {
   phone2: PHONE_2,
   phone2Display: PHONE_2_DISPLAY,
   waLink: `https://wa.me/${PHONE_1.replace("+", "")}`,
-  tgLink: `https://t.me/${PHONE_1.replace("+", "")}`,
+  tgLink: "https://t.me/sashkavod",
   addressLine: "вул. Жоліо Кюрі, 53 (Автостоянка 32), Одеса",
   lat: 46.583572,
   lng: 30.776786,
@@ -415,7 +415,7 @@ const ru: SiteContent = {
   },
   stickyCta: {
     call: "Позвонить",
-    message: "Написать",
+    message: "Писать в Telegram @sashkavod",
   },
 };
 
@@ -586,7 +586,7 @@ const uk: SiteContent = {
   },
   stickyCta: {
     call: "Подзвонити",
-    message: "Написати",
+    message: "Писати в Telegram @sashkavod",
   },
 };
 
