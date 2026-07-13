@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mgs-avtoservice.od.ua/sitemap-index.xml

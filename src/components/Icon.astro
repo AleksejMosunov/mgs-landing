@@ -1,0 +1,49 @@
+---
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className = "w-6 h-6" } = Astro.props;
+
+const paths: Record<string, string> = {
+  diagnostics:
+    "M9 3v2M15 3v2M9 19v2M15 19v2M3 9h2M3 15h2M19 9h2M19 15h2M7 7h10v10H7V7zM10 10h4v4h-4v-4z",
+  maintenance:
+    "M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 1 5.4-5.4l-2.7 2.7-2-2z",
+  prepsale:
+    "M9 12l2 2 4-4M7 3h10a1 1 0 0 1 1 1v16l-6-3-6 3V4a1 1 0 0 1 1-1z",
+  inspection:
+    "M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z M9.5 12l1.8 1.8L14.5 10",
+  tuning:
+    "M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4",
+  styling:
+    "M4 17l4.5-9L13 17M6 13h5M14 6l1.5 3L19 10l-3.5 1L14 14l-1.5-3L9 10l3.5-1L14 6z",
+  engine:
+    "M4 10h2V7h4l2 2h5l2 3v5H4v-3l0-4zM9 10v4M13 10v4M17 12h3",
+  gearbox:
+    "M12 3v3M12 18v3M4.2 7l2.6 1.5M17.2 15.5l2.6 1.5M4.2 17l2.6-1.5M17.2 8.5l2.6-1.5M9 12a3 3 0 1 0 6 0 3 3 0 0 0-6 0z",
+  suspension:
+    "M7 3v4M7 17v4M7 7c0 3 4 3 4 6s-4 3-4 6M17 3l-3 4h4l-3 4",
+  electrics: "M13 2L4 14h6l-1 8 9-12h-6l1-8z",
+  welding:
+    "M3 21l6-6M14 6l4 4M6.5 12.5l5-5 4 4-5 5-4-4zM17 3l1.5 1.5L20 3l1 1-1.5 1.5L21 7l-1 1-1.5-1.5L17 8l-1-1 1.5-1.5L16 4l1-1z",
+  parts:
+    "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4",
+};
+
+const d = paths[name] ?? paths.parts;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.6"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  <path d={d}></path>
+</svg>

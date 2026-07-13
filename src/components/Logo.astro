@@ -1,0 +1,31 @@
+---
+import type { SiteContent } from "../content/site";
+
+interface Props {
+  content: SiteContent;
+  class?: string;
+}
+
+const { content: t, class: className = "" } = Astro.props;
+---
+
+<span class={`inline-flex flex-col leading-none select-none ${className}`}>
+  <span class="flex items-center gap-1.5">
+    <svg class="w-6 h-6 text-lime shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.6" />
+      <circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.6" />
+      <path
+        d="M12 2.5v3M12 18.5v3M21.5 12h-3M5.5 12h-3M18.5 5.5l-2 2M7.5 16.5l-2 2M18.5 18.5l-2-2M7.5 7.5l-2-2"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"
+      />
+    </svg>
+    <span class="font-display text-2xl sm:text-3xl tracking-tight text-ivory italic">
+      {t.brand}
+    </span>
+  </span>
+  <span class="font-heading text-[10px] sm:text-xs tracking-[0.35em] text-lime pl-0.5 mt-0.5">
+    {t.brandSub}
+  </span>
+</span>

@@ -1,0 +1,40 @@
+---
+import type { SiteContent } from "../content/site";
+
+interface Props {
+  content: SiteContent;
+}
+
+const { content: t } = Astro.props;
+
+const checkPath = "M5 13l4 4L19 7";
+---
+
+<section id="why-us" class="relative border-b border-border bg-surface py-16 sm:py-24 scroll-mt-16">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl">
+      <h2 class="font-heading text-3xl sm:text-4xl font-semibold uppercase text-ivory">
+        {t.whyUs.title}
+      </h2>
+      <p class="mt-4 text-muted leading-relaxed">{t.whyUs.subtitle}</p>
+    </div>
+
+    <ul class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
+      {
+        t.whyUs.items.map((item) => (
+          <li class="flex gap-4">
+            <span class="mt-0.5 flex items-center justify-center w-8 h-8 shrink-0 rounded-full bg-lime/10 text-lime border border-lime/30">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d={checkPath} />
+              </svg>
+            </span>
+            <div>
+              <h3 class="font-heading font-semibold text-ivory">{item.title}</h3>
+              <p class="mt-1.5 text-sm text-muted leading-relaxed">{item.desc}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

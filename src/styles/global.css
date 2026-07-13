@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/oswald/500.css";
+@import "@fontsource/oswald/600.css";
+@import "@fontsource/oswald/700.css";
+@import "@fontsource/russo-one/400.css";
+
+@theme {
+  /* Base surfaces */
+  --color-ink: #05060a;
+  --color-surface: #0a0d14;
+  --color-surface-2: #10141d;
+  --color-surface-3: #171c28;
+  --color-border: #232a38;
+
+  /* Brand accents */
+  --color-lime: #c8ff3e;
+  --color-lime-dim: #9fd12e;
+  --color-blue: #1547e0;
+  --color-blue-bright: #2f63ff;
+
+  /* Text */
+  --color-ivory: #f4f6fa;
+  --color-muted: #9aa4b7;
+  --color-muted-2: #626d80;
+
+  --font-display: "Russo One", "Oswald", sans-serif;
+  --font-heading: "Oswald", "Russo One", sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  --animate-marquee: marquee 28s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-ivory);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-lime);
+  color: var(--color-ink);
+}
+
+/* Angular clipped panel used across hero/cards, matching reference art direction */
+.clip-panel {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%);
+}
+
+.clip-panel-r {
+  clip-path: polygon(28px 0, 100% 0, 100% 100%, 0 100%, 0 28px);
+}
+
+.diag-edge {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 40px 100%);
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px var(--color-border);
+  color: transparent;
+}
+
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-lime);
+  outline-offset: 3px;
+}

@@ -1,0 +1,122 @@
+---
+import type { SiteContent } from "../content/site";
+import { contactConst } from "../content/site";
+import Logo from "./Logo.astro";
+
+interface Props {
+  content: SiteContent;
+}
+
+const { content: t } = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const otherLocale = t.locale === "ru" ? "uk" : "ru";
+const alternatePath = currentPath.replace(`/${t.locale}/`, `/${otherLocale}/`) || `/${otherLocale}/`;
+
+const navItems = [
+  { href: "#services", label: t.nav.services },
+  { href: "#why-us", label: t.nav.whyUs },
+  { href: "#process", label: t.nav.process },
+  { href: "#reviews", label: t.nav.reviews },
+  { href: "#faq", label: t.nav.faq },
+  { href: "#contacts", label: t.nav.contacts },
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-border/80 bg-ink/90 backdrop-blur-md">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 sm:h-20 items-center justify-between gap-4">
+      <a href={`/${t.locale}/`} class="focus-ring rounded shrink-0" aria-label="MGS">
+        <Logo content={t} />
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-6 font-heading text-sm uppercase tracking-wide text-muted">
+        {
+          navItems.map((item) => (
+            <a href={item.href} class="hover:text-lime transition-colors duration-200 focus-ring rounded px-1 py-1">
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a
+          href={alternatePath}
+          class="focus-ring hidden sm:inline-flex items-center justify-center w-10 h-10 rounded border border-border text-sm font-heading font-semibold text-muted hover:text-lime hover:border-lime transition-colors duration-200"
+          aria-label={t.nav.langSwitchLabel}
+        >
+          {t.nav.langSwitchLabel}
+        </a>
+        <a
+          href={`tel:${contactConst.phone1}`}
+          class="focus-ring hidden sm:inline-flex items-center gap-2 rounded bg-lime px-4 py-2.5 font-heading font-semibold text-sm uppercase text-ink hover:bg-lime-dim transition-colors duration-200"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          {t.nav.call}
+        </a>
+
+        <button
+          id="menu-toggle"
+          type="button"
+          class="focus-ring lg:hidden inline-flex items-center justify-center w-10 h-10 rounded border border-border text-ivory"
+          aria-label="Menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-border bg-surface">
+    <nav class="mx-auto max-w-7xl px-4 py-4 flex flex-col gap-1 font-heading text-sm uppercase tracking-wide">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="mobile-nav-link focus-ring rounded px-2 py-3 text-muted hover:text-lime hover:bg-surface-2 transition-colors duration-200"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <div class="flex items-center gap-3 mt-2 pt-3 border-t border-border">
+        <a
+          href={alternatePath}
+          class="focus-ring flex-1 inline-flex items-center justify-center rounded border border-border py-2.5 font-semibold text-muted"
+        >
+          {t.nav.langSwitchLabel}
+        </a>
+        <a
+          href={`tel:${contactConst.phone1}`}
+          class="focus-ring flex-[2] inline-flex items-center justify-center gap-2 rounded bg-lime py-2.5 font-semibold text-ink"
+        >
+          {t.nav.call}
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  if (toggle && menu) {
+    toggle.addEventListener("click", () => {
+      const isOpen = menu.classList.toggle("hidden") === false;
+      toggle.setAttribute("aria-expanded", String(isOpen));
+    });
+    menu.querySelectorAll(".mobile-nav-link").forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.classList.add("hidden");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+</script>

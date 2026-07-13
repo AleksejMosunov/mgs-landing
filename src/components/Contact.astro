@@ -1,0 +1,157 @@
+---
+import type { SiteContent } from "../content/site";
+import { contactConst } from "../content/site";
+
+interface Props {
+  content: SiteContent;
+}
+
+const { content: t } = Astro.props;
+
+const mapLink = `https://www.google.com/maps/search/?api=1&query=${contactConst.lat}%2C${contactConst.lng}`;
+---
+
+<section id="contacts" class="relative py-16 sm:py-24 scroll-mt-16">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl">
+      <h2 class="font-heading text-3xl sm:text-4xl font-semibold uppercase text-ivory">
+        {t.contact.title}
+      </h2>
+      <p class="mt-4 text-muted leading-relaxed">{t.contact.subtitle}</p>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <div class="lg:col-span-2 flex flex-col gap-6">
+        <div class="rounded-lg border border-border bg-surface p-6">
+          <dl class="space-y-5">
+            <div>
+              <dt class="font-heading text-xs uppercase tracking-wide text-lime">{t.contact.addressLabel}</dt>
+              <dd class="mt-1.5 text-ivory">{t.contact.address}</dd>
+              <dd class="mt-1 text-sm text-muted-2">{t.contact.addressNote}</dd>
+            </div>
+            <div>
+              <dt class="font-heading text-xs uppercase tracking-wide text-lime">{t.contact.hoursLabel}</dt>
+              <dd class="mt-1.5 text-ivory">{t.contact.hours}</dd>
+            </div>
+            <div>
+              <dt class="font-heading text-xs uppercase tracking-wide text-lime">{t.contact.phonesLabel}</dt>
+              <dd class="mt-1.5 flex flex-col gap-1">
+                <a href={`tel:${contactConst.phone1}`} class="focus-ring rounded text-ivory hover:text-lime transition-colors duration-200 w-fit">
+                  {contactConst.phone1Display}
+                </a>
+                <a href={`tel:${contactConst.phone2}`} class="focus-ring rounded text-ivory hover:text-lime transition-colors duration-200 w-fit">
+                  {contactConst.phone2Display}
+                </a>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="mt-6 flex gap-3">
+            <a
+              href={contactConst.waLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="focus-ring flex-1 inline-flex items-center justify-center gap-2 rounded border border-border py-2.5 text-sm font-heading font-semibold uppercase text-ivory hover:border-lime hover:text-lime transition-colors duration-200"
+            >
+              WhatsApp
+            </a>
+            <a
+              href={contactConst.tgLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="focus-ring flex-1 inline-flex items-center justify-center gap-2 rounded border border-border py-2.5 text-sm font-heading font-semibold uppercase text-ivory hover:border-lime hover:text-lime transition-colors duration-200"
+            >
+              Telegram
+            </a>
+          </div>
+        </div>
+
+        <div class="relative overflow-hidden rounded-lg border border-border h-56">
+          <iframe
+            src={`https://www.google.com/maps?q=${contactConst.lat},${contactConst.lng}&z=16&output=embed`}
+            class="w-full h-full grayscale-[0.2] contrast-[1.1]"
+            style="filter: invert(0.92) hue-rotate(180deg);"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title={t.contact.addressLabel}
+          ></iframe>
+          <a
+            href={mapLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="focus-ring absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded bg-ink/90 border border-border px-3 py-1.5 text-xs font-heading uppercase tracking-wide text-ivory hover:border-lime hover:text-lime transition-colors duration-200"
+          >
+            {t.contact.addressLabel}
+          </a>
+        </div>
+      </div>
+
+      <form
+        id="contact-form"
+        class="lg:col-span-3 rounded-lg border border-border bg-surface p-6 sm:p-8"
+        data-wa-link={contactConst.waLink}
+      >
+        <h3 class="font-heading text-xl font-semibold uppercase text-ivory">{t.contact.formTitle}</h3>
+
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label for="name" class="block text-sm text-muted mb-1.5">{t.contact.formName}</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              autocomplete="name"
+              class="focus-ring w-full rounded border border-border bg-surface-2 px-3.5 py-2.5 text-ivory placeholder:text-muted-2 focus:border-lime"
+            />
+          </div>
+          <div>
+            <label for="phone" class="block text-sm text-muted mb-1.5">{t.contact.formPhone}</label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              required
+              autocomplete="tel"
+              placeholder="+380"
+              class="focus-ring w-full rounded border border-border bg-surface-2 px-3.5 py-2.5 text-ivory placeholder:text-muted-2 focus:border-lime"
+            />
+          </div>
+        </div>
+
+        <div class="mt-5">
+          <label for="service" class="block text-sm text-muted mb-1.5">{t.contact.formService}</label>
+          <select
+            id="service"
+            name="service"
+            class="focus-ring w-full rounded border border-border bg-surface-2 px-3.5 py-2.5 text-ivory focus:border-lime"
+          >
+            {t.services.items.map((item) => <option value={item.title}>{item.title}</option>)}
+          </select>
+        </div>
+
+        <button
+          type="submit"
+          class="focus-ring mt-6 w-full sm:w-auto inline-flex items-center justify-center rounded bg-lime px-8 py-3.5 font-heading font-semibold uppercase tracking-wide text-ink hover:bg-lime-dim transition-colors duration-200"
+        >
+          {t.contact.formSubmit}
+        </button>
+        <p class="mt-4 text-xs text-muted-2 leading-relaxed">{t.contact.formNote}</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const name = String(data.get("name") ?? "");
+    const phone = String(data.get("phone") ?? "");
+    const service = String(data.get("service") ?? "");
+    const base = form.dataset.waLink ?? "";
+    const text = `MGS — ${name}, ${phone}, ${service}`;
+    window.open(`${base}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
+  });
+</script>

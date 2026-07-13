@@ -1,0 +1,58 @@
+---
+import type { SiteContent } from "../content/site";
+
+interface Props {
+  content: SiteContent;
+}
+
+const { content: t } = Astro.props;
+const starPath =
+  "M12 2.5l2.9 6.02 6.6.8-4.85 4.6 1.28 6.58L12 17.3l-5.93 3.2 1.28-6.58-4.85-4.6 6.6-.8L12 2.5z";
+---
+
+<section id="reviews" class="relative border-b border-border py-16 sm:py-24 scroll-mt-16">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div class="max-w-2xl">
+        <h2 class="font-heading text-3xl sm:text-4xl font-semibold uppercase text-ivory">
+          {t.testimonials.title}
+        </h2>
+        <p class="mt-4 text-muted leading-relaxed">{t.testimonials.subtitle}</p>
+      </div>
+      <div class="flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-3 max-w-full">
+        <div class="flex gap-0.5 text-lime shrink-0">
+          {
+            Array.from({ length: 5 }).map(() => (
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d={starPath} />
+              </svg>
+            ))
+          }
+        </div>
+        <span class="text-sm text-muted">{t.testimonials.ratingSummary}</span>
+      </div>
+    </div>
+
+    <ul class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {
+        t.testimonials.items.map((item) => (
+          <li class="rounded-lg border border-border bg-surface p-6 flex flex-col">
+            <div class="flex gap-0.5 text-lime">
+              <span class="sr-only">{t.locale === "ru" ? `Оценка ${item.rating} из 5` : `Оцінка ${item.rating} з 5`}</span>
+              {Array.from({ length: 5 }).map((_, i) => (
+                <svg class={`w-3.5 h-3.5 ${i < item.rating ? "" : "text-border"}`} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d={starPath} />
+                </svg>
+              ))}
+            </div>
+            <p class="mt-4 text-sm text-muted leading-relaxed flex-1">&laquo;{item.text}&raquo;</p>
+            <div class="mt-5 pt-4 border-t border-border">
+              <p class="font-heading font-semibold text-ivory text-sm">{item.name}</p>
+              <p class="text-xs text-muted-2 mt-0.5">{item.car}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "./Header.astro";
+import Hero from "./Hero.astro";
+import Services from "./Services.astro";
+import WhyUs from "./WhyUs.astro";
+import Process from "./Process.astro";
+import Testimonials from "./Testimonials.astro";
+import Faq from "./Faq.astro";
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import StickyCta from "./StickyCta.astro";
+import { getContent, type Locale } from "../content/site";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getContent(locale);
+---
+
+<Layout content={t}>
+  <Header content={t} />
+  <main id="main">
+    <Hero content={t} />
+    <Services content={t} />
+    <WhyUs content={t} />
+    <Process content={t} />
+    <Testimonials content={t} />
+    <Faq content={t} />
+    <Contact content={t} />
+  </main>
+  <Footer content={t} />
+  <StickyCta content={t} />
+</Layout>

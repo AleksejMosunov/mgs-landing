@@ -1,0 +1,53 @@
+---
+import type { SiteContent } from "../content/site";
+import { contactConst } from "../content/site";
+import Logo from "./Logo.astro";
+
+interface Props {
+  content: SiteContent;
+}
+
+const { content: t } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="relative border-t border-border bg-surface">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div class="lg:col-span-2">
+        <Logo content={t} />
+        <p class="mt-4 max-w-xs text-sm text-muted leading-relaxed">{t.footer.tagline}</p>
+      </div>
+
+      <div>
+        <h3 class="font-heading text-xs uppercase tracking-wide text-lime">{t.footer.servicesTitle}</h3>
+        <ul class="mt-4 space-y-2.5 text-sm text-muted">
+          {t.services.items.slice(0, 6).map((item) => <li>{item.title}</li>)}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-heading text-xs uppercase tracking-wide text-lime">{t.footer.contactsTitle}</h3>
+        <ul class="mt-4 space-y-2.5 text-sm text-muted">
+          <li>{t.contact.address}</li>
+          <li>
+            <a href={`tel:${contactConst.phone1}`} class="focus-ring rounded hover:text-lime transition-colors duration-200">
+              {contactConst.phone1Display}
+            </a>
+          </li>
+          <li>
+            <a href={`tel:${contactConst.phone2}`} class="focus-ring rounded hover:text-lime transition-colors duration-200">
+              {contactConst.phone2Display}
+            </a>
+          </li>
+          <li>{t.contact.hours}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-2">
+      <p>&copy; {year} MGS. {t.footer.rights}</p>
+      <p class="font-heading uppercase tracking-widest">Odesa · Ukraine</p>
+    </div>
+  </div>
+</footer>

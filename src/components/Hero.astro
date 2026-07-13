@@ -1,0 +1,81 @@
+---
+import { Image } from "astro:assets";
+import type { SiteContent } from "../content/site";
+import { contactConst } from "../content/site";
+import heroImg from "../assets/images/mgs-gallery-car.jpg";
+
+interface Props {
+  content: SiteContent;
+}
+
+const { content: t } = Astro.props;
+---
+
+<section class="relative overflow-hidden border-b border-border">
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(21,71,224,0.16),transparent_55%)]"></div>
+  <div
+    class="absolute left-0 top-0 h-full w-80 hidden lg:block"
+    style="background: linear-gradient(100deg, rgba(21,71,224,0.16), rgba(21,71,224,0.05) 55%, transparent 80%);"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-14 pb-16 sm:pt-20 lg:grid lg:grid-cols-12 lg:gap-8 lg:items-center">
+    <div class="lg:col-span-7 max-w-3xl">
+      <p class="inline-flex items-center gap-2 font-heading text-xs sm:text-sm uppercase tracking-[0.25em] text-lime border border-lime/30 bg-lime/5 rounded-full px-4 py-1.5">
+        {t.hero.eyebrow}
+      </p>
+
+      <h1 class="mt-6 font-display italic text-4xl sm:text-6xl lg:text-6xl xl:text-7xl leading-[0.95] text-ivory">
+        {t.hero.title}
+        <span class="block text-lime mt-1">{t.hero.titleAccent}</span>
+      </h1>
+
+      <p class="mt-6 max-w-xl text-base sm:text-lg text-muted leading-relaxed">
+        {t.hero.subtitle}
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-4">
+        <a
+          href="#contacts"
+          class="focus-ring inline-flex items-center justify-center rounded bg-lime px-6 py-3.5 font-heading font-semibold uppercase tracking-wide text-ink hover:bg-lime-dim transition-colors duration-200"
+        >
+          {t.hero.ctaPrimary}
+        </a>
+        <a
+          href={`tel:${contactConst.phone1}`}
+          class="focus-ring inline-flex items-center justify-center gap-2 rounded border border-border px-6 py-3.5 font-heading font-semibold uppercase tracking-wide text-ivory hover:border-lime hover:text-lime transition-colors duration-200"
+        >
+          {t.hero.ctaSecondary}
+        </a>
+      </div>
+
+      <dl class="mt-12 grid grid-cols-3 max-w-xl gap-4 sm:gap-8 border-t border-border pt-6">
+        {
+          t.hero.stats.map((stat) => (
+            <div>
+              <dt class="font-display text-2xl sm:text-4xl text-ivory">{stat.value}</dt>
+              <dd class="mt-1 text-xs sm:text-sm text-muted-2 leading-snug">{stat.label}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    <div class="hidden lg:block lg:col-span-5">
+      <div class="relative clip-panel aspect-[3/4] border border-border">
+        <Image
+          src={heroImg}
+          alt={t.locale === "ru" ? "Тюнингованный автомобиль в боксе автосервиса MGS" : "Тюнінгований автомобіль у боксі автосервісу MGS"}
+          class="absolute inset-0 w-full h-full object-cover"
+          widths={[400, 560, 679]}
+          sizes="(min-width: 1024px) 40vw, 100vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent"></div>
+        <div class="absolute inset-0 ring-1 ring-inset ring-lime/10"></div>
+      </div>
+    </div>
+  </div>
+</section>
