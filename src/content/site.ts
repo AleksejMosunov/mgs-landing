@@ -415,7 +415,7 @@ const ru: SiteContent = {
   },
   stickyCta: {
     call: "Позвонить",
-    message: "Писать в Telegram @sashkavod",
+    message: "Написать",
   },
 };
 
@@ -586,7 +586,7 @@ const uk: SiteContent = {
   },
   stickyCta: {
     call: "Подзвонити",
-    message: "Писати в Telegram @sashkavod",
+    message: "Написати",
   },
 };
 
