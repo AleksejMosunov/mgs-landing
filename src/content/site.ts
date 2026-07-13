@@ -142,8 +142,8 @@ export const contactConst = {
   waLink: `https://wa.me/${PHONE_1.replace("+", "")}`,
   tgLink: `https://t.me/${PHONE_1.replace("+", "")}`,
   addressLine: "вул. Жоліо Кюрі, 53 (Автостоянка 32), Одеса",
-  lat: 46.4644,
-  lng: 30.7215,
+  lat: 46.583572,
+  lng: 30.776786,
 };
 
 const ruServiceCopy: Record<string, { title: string; desc: string }> = {
